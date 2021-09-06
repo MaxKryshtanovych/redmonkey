@@ -1,0 +1,7 @@
+<div class="client">
+    <h1>Edit client</h1>
+    <form method="POST" class="client-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Save</button>
+    </form>
+</div>

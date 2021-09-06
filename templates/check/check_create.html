@@ -1,0 +1,7 @@
+<div class="check">
+    <h1>New check</h1>
+    <form method="POST" class="check-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Save</button>
+    </form>
+</div>

@@ -1,0 +1,9 @@
+<a href="{% url 'client_create' %}">new client</a>
+{% for client in clients %}
+    <div class="client">
+        <a href="{% url 'client_edit' pk=client.pk %}">edit</a>
+        <h1>{{ client.surname }}</h1>
+        <h1>{{ client.name }}</h1>
+        <h1>{{ client.fatname }}</h1>
+    </div>
+{% endfor %}
