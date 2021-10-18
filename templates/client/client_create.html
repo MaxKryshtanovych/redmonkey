@@ -1,7 +1,36 @@
-<div class="client">
-    <h1>New client</h1>
-    <form method="POST" class="client-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn">Save</button>
-    </form>
-</div>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="index-body">
+        <h1 class="head-new">Новий клієнт</h1>
+        <form method="post" class="che-form" autocomplete="off">
+            {% csrf_token %}
+            <div class="fie-con">
+                {{ form.surname.label_tag }}
+                <div class="che-tex">{{ form.surname }}</div>
+            </div>
+            <div class="fie-con">
+                {{ form.name.label_tag }}
+                <div class="che-tex">{{ form.name }}</div>
+            </div>
+            <div class="fie-con">
+                {{ form.fatname.label_tag }}
+                <div class="che-tex">{{ form.fatname }}</div>
+            </div>
+            <div class="fie-con">
+                {{ form.phone.label_tag }}
+                <div class="che-tex">{{ form.phone }}</div>
+            </div>
+            <div class="fie-con">
+                {{ form.email.label_tag }}
+                <div class="che-em">{{ form.email }}</div>
+            </div>
+            <div class="fie-con">
+                {{ form.tgid.label_tag }}
+                <div class="che-tex">{{ form.tgid }}</div>
+            </div>
+            <button type="submit" class="che-but">Створити</button>
+        </form>
+    </div>
+{% endblock %}

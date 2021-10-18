@@ -1,9 +1,37 @@
-<a href="{% url 'client_create' %}">new client</a>
-{% for client in clients %}
-    <div class="client">
-        <a href="{% url 'client_edit' pk=client.pk %}">edit</a>
-        <h1>{{ client.surname }}</h1>
-        <h1>{{ client.name }}</h1>
-        <h1>{{ client.fatname }}</h1>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="index-body">
+        <div class="new-per">
+            <a href="{% url 'client_create' %}">ДОДАТИ НОВОГО КЛІЄНТА</a>
+        </div>
+        <div style="overflow-x: auto;">
+            <table id="persons">
+                <tr>
+                    <th>Id</th>
+                    <th>Прізвище</th>
+                    <th>Ім'я</th>
+                    <th>По-батькові</th>
+                    <th>Телефон</th>
+                    <th>Е-пошта</th>
+                    <th>Телеграм</th>
+                    <th style="text-align: center;"><i class="fa fa-pencil"></i></th>
+                </tr>
+                {% for client in clients %}
+                    <tr>
+                        <td><a href="{% url 'client_detail' pk=client.pk %}">{{ client.id }}</a></td>
+                        <td><a href="{% url 'client_detail' pk=client.pk %}">{{ client.surname }}</a></td>
+                        <td><a href="{% url 'client_detail' pk=client.pk %}">{{ client.name }}</a></td>
+                        <td><a href="{% url 'client_detail' pk=client.pk %}">{{ client.fatname }}</a></td>
+                        <td><a href="{% url 'client_detail' pk=client.pk %}">{{ client.phone }}</a></td>
+                        <td><a href="{% url 'client_detail' pk=client.pk %}">{{ client.email }}</a></td>
+                        <td><a href="{% url 'client_detail' pk=client.pk %}">{{ client.tgid }}</a></td>
+                        <td style="text-align: center;"><a href="{% url 'client_edit' pk=client.pk %}"><i class="fa fa-pencil"></i></a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
-{% endfor %}
+
+{% endblock %}

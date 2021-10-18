@@ -1,5 +1,10 @@
+{% extends 'base.html' %}
 {% load static %}
-{% include "header.html" %}
-<a href="{% url 'client_list' %}">Список клієнтів</a>
-<a href="{% url 'employer_list' %}">Список ФОПів</a>
-<a href="{% url 'check_create' %}">Створити чек</a>
+
+{% block content %}
+    <div class="index-body" style="justify-content: center; display: flex; background-color: #fff; border: 1px solid #ddd;">
+        <div class="circle">
+            <img class="rm-gif" src="{% static "img/red_monkey.gif" %}">
+        </div>
+    </div>
+{% endblock %}

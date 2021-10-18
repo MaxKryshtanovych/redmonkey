@@ -1,30 +1,240 @@
-body {margin: 0;}
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
 
 ul.topnav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #000000;
+    padding: 0;
+    margin: 0;
 }
 
-ul.topnav li {float: left;}
+ul.topnav li {
+    display: list-item;
+}
 
 ul.topnav li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #ddd;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    margin: 5px;
 }
 
-ul.topnav li a:hover:not(.active) {background-color: #111;}
-
-ul.topnav li a.active {background-color: #04AA6D;}
-
-ul.topnav li.right {float: right;}
+ul.topnav li a:hover {
+    background-color: #fc0000;
+    border-radius: 10px;
+}
 
 @media screen and (max-width: 600px) {
-  ul.topnav li.right,
-  ul.topnav li {float: none;}
+    ul.topnav {
+        flex-direction: column;
+    }
+}
+
+.index-body {
+    display: block;
+    margin-left: 100px;
+    margin-right: 100px;
+    box-shadow: 0 0 5px 1px black;
+    min-height: 600px;
+}
+
+.circle {
+    background: #fc0000;
+    clip-path: circle(50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+    width: 500px;
+    height: 500px;
+}
+
+.rm-gif {
+    padding: 80px;
+}
+
+#persons {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#persons td, #persons th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#persons tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#persons tr:hover {
+    background-color: #ddd;
+}
+
+#persons th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #000000;
+    color: white;
+}
+
+#persons td a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.new-per {
+    display: block;
+    background-color: #000000;
+    padding: 20px;
+    border: 1px solid #ddd;
+}
+
+.new-per a {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #fc0000;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #f1f1f1;
+    margin-left: 38%;
+    margin-right: 34%;
+}
+
+.new-per a:hover {
+    background-color: #c70000
+}
+
+.new-per a:active {
+    background-color: #850000;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.che-form {
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.che-sel select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
+.che-num input[type=number] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f1f1f1;
+}
+
+.che-tex input[type=text] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f1f1f1;
+}
+
+.che-em input[type=email] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f1f1f1;
+}
+
+.che-but {
+    display: inline-block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #fc0000;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #f1f1f1;
+}
+
+.che-but:hover {
+    background-color: #c70000
+}
+
+.che-but:active {
+    background-color: #850000;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.fie-con {
+    display: block;
+    margin-top: 10px;
+}
+
+.fie-con label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.head-new {
+    margin: 0 auto;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.per-card {
+    margin-left: 30%;
+    margin-right: 30%;
+    padding-top: 80px;
+    text-align: center;
+}
+
+.per-card h1, h3 {
+    margin-top: 0;
+}
+
+.per-but {
+    margin-left: 30%;
+    margin-right: 30%;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.per-but a {
+    font-size: 24px;
+    text-decoration: none;
+    color: #fff;
+    padding: 5px;
 }

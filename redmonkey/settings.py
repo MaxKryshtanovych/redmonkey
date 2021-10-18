@@ -119,8 +119,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
@@ -133,7 +136,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 TOKEN = '1920507787:AAEKFmA68VTvi1R7v0GgACdU1c30bQSfbn8'
 
-WEBHOOK_HOST = 'd322-31-134-105-41.ngrok.io'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'redmonkeycheckmaker@gmail.com'
+EMAIL_HOST_PASSWORD = 'moloko322'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+ADMIN_TGID = '683481779'
+ADMIN_EMAIL = 'redmonkeycheckmaker@gmail.com'
+
+WEBHOOK_HOST = 'f411-31-134-105-41.ngrok.io'
 WEBHOOK_PORT = 80  # 443, 80, 88 or 8443 (port need to be 'open')
 WEBHOOK_LISTEN = '0.0.0.0'  # In some VPS you may need to put here the IP addr
 

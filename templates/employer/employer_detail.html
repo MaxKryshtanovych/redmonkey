@@ -1,6 +1,20 @@
-<div class="employer">
-    <a href="{% url 'employer_edit' pk=employer.pk %}">edit</a>
-    <h1>{{ employer.surname }}</h1>
-    <h1>{{ employer.name }}</h1>
-    <h1>{{ employer.fatname }}</h1>
-</div>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="index-body">
+        <div class="per-card">
+            <h1>{{ employer.surname }}</h1>
+            <h1>{{ employer.name }}</h1>
+            <h1>{{ employer.fatname }}</h1>
+            <h3>{{ employer.id_code }}</h3>
+            <h3>{{ employer.bank }}</h3>
+            <h3>{{ employer.bank_account }}</h3>
+        </div>
+        <div class="per-but">
+            <button type="button" class="che-but">
+                <a href="{% url 'employer_edit' pk=employer.pk %}">Редагувати <i class="fa fa-pencil"></i></a>
+            </button>
+        </div>
+    </div>
+{% endblock %}

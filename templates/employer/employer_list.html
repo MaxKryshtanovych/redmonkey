@@ -1,9 +1,37 @@
-<a href="{% url 'employer_create' %}">new employer</a>
-{% for employer in employers %}
-    <div class="employer">
-        <a href="{% url 'employer_edit' pk=employer.pk %}">edit</a>
-        <h1>{{ employer.surname }}</h1>
-        <h1>{{ employer.name }}</h1>
-        <h1>{{ employer.fatname }}</h1>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="index-body">
+        <div class="new-per">
+            <a href="{% url 'employer_create' %}">ДОДАТИ НОВОГО ФОП</a>
+        </div>
+        <div style="overflow-x: auto;">
+            <table id="persons">
+                <tr>
+                    <th>Id</th>
+                    <th>Прізвище</th>
+                    <th>Ім'я</th>
+                    <th>По-батькові</th>
+                    <th>ЄДРПОУ</th>
+                    <th>Банк</th>
+                    <th>Банківський рахунок</th>
+                    <th><i class="fa fa-pencil"></i></th>
+                </tr>
+                {% for employer in employers %}
+                    <tr>
+                        <td><a href="{% url 'employer_detail' pk=employer.pk %}">{{ employer.id }}</a></td>
+                        <td><a href="{% url 'employer_detail' pk=employer.pk %}">{{ employer.surname }}</a></td>
+                        <td><a href="{% url 'employer_detail' pk=employer.pk %}">{{ employer.name }}</a></td>
+                        <td><a href="{% url 'employer_detail' pk=employer.pk %}">{{ employer.fatname }}</a></td>
+                        <td><a href="{% url 'employer_detail' pk=employer.pk %}">{{ employer.id_code }}</a></td>
+                        <td><a href="{% url 'employer_detail' pk=employer.pk %}">{{ employer.bank }}</a></td>
+                        <td><a href="{% url 'employer_detail' pk=employer.pk %}">{{ employer.bank_account }}</a></td>
+                        <td style="text-align: center;"><a href="{% url 'employer_edit' pk=employer.pk %}"><i class="fa fa-pencil"></i></a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
-{% endfor %}
+
+{% endblock %}

@@ -1,6 +1,23 @@
-<div class="client">
-    <a href="{% url 'client_edit' pk=client.pk %}">edit</a>
-    <h1>{{ client.surname }}</h1>
-    <h1>{{ client.name }}</h1>
-    <h1>{{ client.fatname }}</h1>
-</div>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="index-body">
+        <div class="per-card">
+            <h1>{{ client.surname }}</h1>
+            <h1>{{ client.name }}</h1>
+            <h1>{{ client.fatname }}</h1>
+            <h3>{{ client.pass_id }}</h3>
+            <h3>{{ client.pass_detail }}</h3>
+            <h3>{{ client.ipn }}</h3>
+            <h3>{{ client.phone }}</h3>
+            <h3>{{ client.email }}</h3>
+            <h3>{{ client.tgid }}</h3>
+        </div>
+        <div class="per-but">
+            <button type="button" class="che-but">
+                <a href="{% url 'client_edit' pk=client.pk %}">Редагувати <i class="fa fa-pencil"></i></a>
+            </button>
+        </div>
+    </div>
+{% endblock %}

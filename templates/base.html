@@ -1,0 +1,21 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redmonkey check maker</title>
+    <script src="https://use.fontawesome.com/228db8f364.js"></script>
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+</head>
+<body>
+<ul class="topnav">
+    <li><a href="{% url 'index' %}">ГОЛОВНА</a></li>
+    <li><a href="{% url 'client_list' %}">СПИСОК КЛІЄНТІВ</a></li>
+    <li><a href="{% url 'employer_list' %}">СПИСОК ФОП</a></li>
+    <li><a href="{% url 'check_create' %}">СТВОРИТИ ЧЕК</a></li>
+</ul>
+{% block content %}
+{% endblock %}
+</body>
+</html>

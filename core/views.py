@@ -1,19 +1,21 @@
 import logging
 from django.conf import settings
-from django.http import HttpResponse, JsonResponse
+from django.core.mail import EmailMessage
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from django.views.decorators.csrf import csrf_exempt
-from requests import Response
-from redmonkey.settings import WEBHOOK_LISTEN, WEBHOOK_PORT, WEBHOOK_SSL_CERT, WEBHOOK_SSL_PRIV, WEBHOOK_URL_BASE, \
-    WEBHOOK_URL_PATH
+from django.contrib.auth.models import User
+from telebot import TeleBot, types, logger
+from redmonkey.settings import WEBHOOK_SSL_CERT, WEBHOOK_URL_BASE, \
+    WEBHOOK_URL_PATH, ADMIN_TGID, ADMIN_EMAIL
 from .forms import ClientForm, CheckForm, EmployerForm
 from .models import Client, Employer
-from telebot import TeleBot, types, logger
 
 logger.setLevel(logging.DEBUG)
 
 bot = TeleBot(settings.TOKEN)
+
+user = User.email
 
 
 class WebHookView(View):
@@ -38,9 +40,19 @@ def echo_message(message):
     bot.reply_to(message, message.text)
 
 
-def send_check(check):
+def send_check_tg(tgid):
     photo = open('client_check.jpg', 'rb')
-    bot.send_photo(chat_id=check.client.tgid, photo=photo)
+    bot.send_photo(chat_id=tgid, photo=photo)
+
+
+def send_check_email(email):
+    subject = 'Чек від RedMonkey'
+    message = 'Lorem ipsum'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [email, ADMIN_EMAIL]
+    msg = EmailMessage(subject, message, email_from, recipient_list)
+    msg.attach_file('client_check.jpg')
+    msg.send()
 
 
 def index(request):
@@ -105,7 +117,7 @@ def employer_create(request):
 
 
 def employer_edit(request, pk):
-    employer = get_object_or_404(Client, pk=pk)
+    employer = get_object_or_404(Employer, pk=pk)
     if request.method == "POST":
         form = EmployerForm(request.POST, instance=employer)
         if form.is_valid():
@@ -123,7 +135,13 @@ def check_create(request):
         if form.is_valid():
             check = form.save(commit=False)
             check.save()
-            send_check(check)
+            if check.client.tgid != 'default':
+                send_check_tg(check.client.tgid)
+                send_check_tg(ADMIN_TGID)
+            else:
+                send_check_tg(ADMIN_TGID)
+                send_check_email(ADMIN_EMAIL)
+            send_check_email(check.client.email)
             return redirect('index')
     else:
         form = CheckForm()
@@ -134,4 +152,3 @@ bot.remove_webhook()
 
 bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH,
                 certificate=open(WEBHOOK_SSL_CERT, 'r'))
-
