@@ -1,33 +1,29 @@
 import logging
 from django.conf import settings
 from django.core.mail import EmailMessage
-from django.http import JsonResponse
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from django.contrib.auth.models import User
 from telebot import TeleBot, types, logger
-from redmonkey.settings import WEBHOOK_SSL_CERT, WEBHOOK_URL_BASE, \
-    WEBHOOK_URL_PATH, ADMIN_TGID, ADMIN_EMAIL
 from .forms import ClientForm, CheckForm, EmployerForm
-from .models import Client, Employer
+from .models import Client, Employer, Check
 
 logger.setLevel(logging.DEBUG)
 
 bot = TeleBot(settings.TOKEN)
 
-user = User.email
+
+def getMessage():
+    json_string = request.get_data().decode('utf-8')
+    update = telebot.types.Update.de_json(json_string)
+    bot.process_new_updates([update])
+    return HttpResponse(status=200)
 
 
-class WebHookView(View):
-    def get(self, request, *args, **kwargs):
-        return JsonResponse({"ok": "Get request processed. But nothing done"})
-
-    def post(self, request, *args, **kwargs):
-        json_str = request.body.decode('UTF-8')
-        update = types.Update.de_json(json_str)
-        bot.process_new_updates([update])
-
-        return JsonResponse({"ok": "POST request processed"})
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url='https://redmonkeycheckmaker.herokuapp.com' + settings.TOKEN)
+    return HttpResponse(status=200)
 
 
 @bot.message_handler(commands=['start'])
@@ -146,9 +142,3 @@ def check_create(request):
     else:
         form = CheckForm()
     return render(request, 'check/check_create.html', {'form': form})
-
-
-bot.remove_webhook()
-
-bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH,
-                certificate=open(WEBHOOK_SSL_CERT, 'r'))
