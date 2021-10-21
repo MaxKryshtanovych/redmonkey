@@ -7,10 +7,11 @@ from django.views import View
 from telebot import TeleBot, types, logger
 from .forms import ClientForm, CheckForm, EmployerForm
 from .models import Client, Employer, Check
+from redmonkey.settings import ADMIN_TGID, ADMIN_EMAIL, TOKEN, EMAIL_HOST_USER
 
 logger.setLevel(logging.DEBUG)
 
-bot = TeleBot(settings.TOKEN)
+bot = TeleBot(TOKEN)
 
 
 def getMessage():
@@ -22,7 +23,7 @@ def getMessage():
 
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='https://redmonkeycheckmaker.herokuapp.com' + settings.TOKEN)
+    bot.set_webhook(url='https://redmonkeycheckmaker.herokuapp.com' + TOKEN)
     return HttpResponse(status=200)
 
 
@@ -44,7 +45,7 @@ def send_check_tg(tgid):
 def send_check_email(email):
     subject = 'Чек від RedMonkey'
     message = 'Lorem ipsum'
-    email_from = settings.EMAIL_HOST_USER
+    email_from = EMAIL_HOST_USER
     recipient_list = [email, ADMIN_EMAIL]
     msg = EmailMessage(subject, message, email_from, recipient_list)
     msg.attach_file('client_check.jpg')
