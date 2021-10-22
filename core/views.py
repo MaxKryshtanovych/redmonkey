@@ -134,11 +134,9 @@ def check_create(request):
             check.save()
             if check.client.tgid != 'default':
                 send_check_tg(check.client.tgid)
-                send_check_tg(ADMIN_TGID)
-            else:
-                send_check_tg(ADMIN_TGID)
-                send_check_email(ADMIN_EMAIL)
             send_check_email(check.client.email)
+            send_check_tg(ADMIN_TGID)
+            send_check_email(ADMIN_EMAIL)
             return redirect('index')
     else:
         form = CheckForm()
