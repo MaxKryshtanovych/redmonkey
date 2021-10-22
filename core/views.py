@@ -23,7 +23,7 @@ def getMessage():
 
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='https://redmonkeycheckmaker.herokuapp.com' + TOKEN)
+    bot.set_webhook(url='https://redmonkeycheckmaker.herokuapp.com/' + TOKEN)
     return HttpResponse(status=200)
 
 
